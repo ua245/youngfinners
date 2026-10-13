@@ -51,6 +51,16 @@ body {
 }
 .btn:hover { opacity: 0.85; }
 .btn:disabled { opacity: 0.5; }
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: border-color var(--dur) linear;
+}
+.btn-secondary:hover { border-color: var(--crimson); }
 .field {
   background: var(--bg);
   border: 1px solid var(--line);

@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { repScore, fundingEligibility, releasableFunds, financialAccuracy } from "../lib/rep.ts";
 import { auditBudget, matchmake, generateRoadmap, validateIdea } from "../lib/zaro.ts";
+import { isValidStudentId, SAMPLE_STUDENT_ID } from "../lib/auth.ts";
 
 const budget = [
   { category: "Cloud", planned: 100, actual: 150 },
@@ -53,4 +54,10 @@ test("matchmaking filters", () => {
 test("validator needs both sides of team", () => {
   const v = validateIdea("A web app for campus students with subscription pricing MVP in 8 weeks", { builders: 1, strategists: 0 }, { persona: "strict-vc" });
   assert.equal(v.team, 50);
+});
+
+test("sample student authentication only accepts the documented ID", () => {
+  assert.equal(isValidStudentId(SAMPLE_STUDENT_ID), true);
+  assert.equal(isValidStudentId(` ${SAMPLE_STUDENT_ID.toUpperCase()} `), true);
+  assert.equal(isValidStudentId("other@university.ac.uk"), false);
 });
